@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Ng-sglclick by ptiswitz</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Ng-sglclick</h1>
+      <h2 class="project-tagline">Simple directive for coexist click and double click event on the same element</h2>
+      <a href="https://github.com/ptiswitz/ng-sglclick" class="btn">View on GitHub</a>
+      <a href="https://github.com/ptiswitz/ng-sglclick/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/ptiswitz/ng-sglclick/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h2>
+<a id="why" class="anchor" href="#why" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why</h2>
+
+<p>Sometimes, you need to use a click and a double-click on the same element to do two separate actions. With angular standard directives (ng-click and ng-dblclick), the ng-click and ng-dblclick will be fired at the same time</p>
+
+<h2>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<p>You can install it by :</p>
+
+<ul>
+<li>Downloading the minified version from this <a href="https://raw.githubusercontent.com/ptiswitz/ng-sglclick/master/lib/ng-sglclick.js">link</a> and the source from this <a href="https://github.com/ptiswitz/ng-sglclick/blob/master/lib/ng-sglclick.min.js">link</a>
+</li>
+<li>Using the unminified version with a <a href="https://rawgit.com/ptiswitz/ng-sglclick/master/lib/ng-sglclick.js">CDN</a> for development</li>
+<li>Using the minified version with a <a href="https://cdn.rawgit.com/ptiswitz/ng-sglclick/master/lib/ng-sglclick.min.js">CDN</a> for production</li>
+</ul>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<div class="highlight highlight-html"><pre><span class="pl-s1">  &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1">  &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>https://rawgit.com/ptiswitz/ng-sglclick/master/lib/ng-sglclick.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+  &lt;<span class="pl-ent">div</span> <span class="pl-e">ng-controller</span>=<span class="pl-s"><span class="pl-pds">"</span>SomeController<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">h1</span>&gt;Examples&lt;/<span class="pl-ent">h1</span>&gt;
+
+    &lt;<span class="pl-ent">h2</span>&gt;Without ng-sglclick&lt;/<span class="pl-ent">h2</span>&gt;
+    &lt;<span class="pl-ent">button</span> <span class="pl-e">ng-init</span>=<span class="pl-s"><span class="pl-pds">"</span>firstStack=[]<span class="pl-pds">"</span></span> <span class="pl-e">ng-click</span>=<span class="pl-s"><span class="pl-pds">"</span>once(firstStack)<span class="pl-pds">"</span></span> <span class="pl-e">ng-dblclick</span>=<span class="pl-s"><span class="pl-pds">"</span>twice(firstStack)<span class="pl-pds">"</span></span>&gt;Hit me !&lt;/<span class="pl-ent">button</span>&gt;
+    &lt;<span class="pl-ent">ul</span>&gt;
+      &lt;<span class="pl-ent">li</span> <span class="pl-e">ng-repeat</span>=<span class="pl-s"><span class="pl-pds">"</span>msg in firstStack track by $index<span class="pl-pds">"</span></span>&gt;{{msg}}&lt;/<span class="pl-ent">li</span>&gt;
+    &lt;/<span class="pl-ent">ul</span>&gt;
+
+    &lt;<span class="pl-ent">h2</span>&gt;With ng-sglclick&lt;/<span class="pl-ent">h2</span>&gt;
+    &lt;<span class="pl-ent">button</span> <span class="pl-e">ng-init</span>=<span class="pl-s"><span class="pl-pds">"</span>secondStack=[]<span class="pl-pds">"</span></span> <span class="pl-e">ng-sglclick</span>=<span class="pl-s"><span class="pl-pds">"</span>once(secondStack)<span class="pl-pds">"</span></span> <span class="pl-e">ng-dblclick</span>=<span class="pl-s"><span class="pl-pds">"</span>twice(secondStack)<span class="pl-pds">"</span></span>&gt;Hit me !&lt;/<span class="pl-ent">button</span>&gt;
+    &lt;<span class="pl-ent">ul</span>&gt;
+      &lt;<span class="pl-ent">li</span> <span class="pl-e">ng-repeat</span>=<span class="pl-s"><span class="pl-pds">"</span>msg in secondStack track by $index<span class="pl-pds">"</span></span>&gt;{{msg}}&lt;/<span class="pl-ent">li</span>&gt;
+    &lt;/<span class="pl-ent">ul</span>&gt;
+  &lt;/<span class="pl-ent">div</span>&gt;
+<span class="pl-s1">  &lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s1">    angular.module(<span class="pl-s"><span class="pl-pds">'</span>YOUR_APP<span class="pl-pds">'</span></span>, [</span>
+<span class="pl-s1">      <span class="pl-s"><span class="pl-pds">'</span>ngSglclick<span class="pl-pds">'</span></span></span>
+<span class="pl-s1">    ])</span>
+<span class="pl-s1">    .controller(<span class="pl-s"><span class="pl-pds">'</span>SomeController<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (<span class="pl-smi">$scope</span>) {</span>
+<span class="pl-s1">      <span class="pl-c1">$scope</span>.<span class="pl-en">once</span> <span class="pl-k">=</span> <span class="pl-k">function</span>(<span class="pl-smi">msg</span>) {</span>
+<span class="pl-s1">        msg.<span class="pl-c1">push</span>(<span class="pl-s"><span class="pl-pds">'</span>Hit once<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">      };</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">      <span class="pl-c1">$scope</span>.<span class="pl-en">twice</span> <span class="pl-k">=</span> <span class="pl-k">function</span>(<span class="pl-smi">msg</span>) {</span>
+<span class="pl-s1">        msg.<span class="pl-c1">push</span>(<span class="pl-s"><span class="pl-pds">'</span>Hit twice<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">      };</span>
+<span class="pl-s1">    });</span>
+<span class="pl-s1">  &lt;/<span class="pl-ent">script</span>&gt;</span></pre></div>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/ptiswitz/ng-sglclick">Ng-sglclick</a> is maintained by <a href="https://github.com/ptiswitz">ptiswitz</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
+
