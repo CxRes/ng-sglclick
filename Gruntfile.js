@@ -18,7 +18,8 @@ module.exports = function (grunt) {
   // Configurable paths for the application
   var appConfig = {
     app: require('./bower.json').appPath || 'app',
-    dist: 'dist'
+    dist: 'dist',
+    name: require('./bower.json').name || 'app',
   };
 
   // Define the configuration for all the tasks
@@ -146,7 +147,8 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      server: '.tmp'
+      server: '.tmp',
+      lib: 'lib'
     },
 
     // Add vendor prefixed styles
@@ -256,15 +258,16 @@ module.exports = function (grunt) {
     //     }
     //   }
     // },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
+    uglify: {
+      options: {
+        banner: '/*! <%= yeoman.name %> <%= grunt.template.today("dd-mm-yyyy") %> */\n'
+      },
+      lib: {
+        files: {
+          'lib/<%= yeoman.name %>.min.js': ['<%= copy.lib.dest %>']
+        }
+      }
+    },
     // concat: {
     //   dist: {}
     // },
@@ -357,6 +360,10 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
+      },
+      lib: {
+        dest: 'lib/<%= yeoman.name %>.js',
+        src: '<%= yeoman.app %>/scripts/directives/ng-sglclick.js'
       }
     },
 
@@ -435,5 +442,11 @@ module.exports = function (grunt) {
     'newer:jshint',
     'test',
     'build'
+  ]);
+
+  grunt.registerTask('lib', [
+    'clean:lib',
+    'copy:lib',
+    'uglify:lib'
   ]);
 };

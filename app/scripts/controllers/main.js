@@ -9,9 +9,12 @@
  */
 angular.module('ngSglclickApp')
   .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+
+    $scope.once = function(msg) {
+      msg.push('Hit once');
+    };
+
+    $scope.twice = function(msg) {
+      msg.push('Hit twice');
+    };
   });
