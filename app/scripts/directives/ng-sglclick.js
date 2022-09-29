@@ -26,7 +26,7 @@
               scope.$apply(function () {
                 callback(scope);
               });
-            }, 300);
+            }, 600);
           }
           else {
             $timeout.cancel(singleClickDebounce);
